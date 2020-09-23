@@ -10,6 +10,8 @@ If there exists a solution, it is guaranteed to be unique.
 Both input arrays are non-empty and have the same length.
 Each element in the input arrays is a non-negative integer.'''
 
+
+# This is an inefficient solution. Time Complexity - O(N^2)
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         n = len(gas)
@@ -34,3 +36,23 @@ class Solution:
                         if start_idx == end_idx:
                             return start_idx
         return -1
+    
+# This is an efficient solution. Time Complexity - O(N)
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        n = len(gas)
+        total = 0
+        start_idx = 0
+        tank = 0
+        for i in range(n):
+            left_gas = gas[i] - cost[i]
+            tank += left_gas
+            if tank < 0:
+                start_idx = i + 1
+                tank = 0
+            total += left_gas
+        if total >= 0:
+            return start_idx
+        return -1
+            
