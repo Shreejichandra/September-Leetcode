@@ -5,18 +5,12 @@ class Solution:
         if len(nums) == 0:
             return ""
         
-        for j in range(len(nums)):
-            for i in range(len(nums) - j - 1):
-                if str(nums[i]) + str(nums[i+1]) < str(nums[i+1])+str(nums[i]):
-                    nums[i], nums[i+1] = nums[i+1], nums[i] 
-                    #print(nums)
-                
-        s = "".join(str(i) for i in nums)
-        if int(s) == 0:
-            return "0"
-        return s
-           
-    
-                
+        def compare(a, b):
+            return int(str(b)+str(a)) - int(str(a)+str(b))
+                    
         
+        nums.sort(key = cmp_to_key(compare))
+        #print(nums)        
+        s = "".join(str(i) for i in nums)
+        return str(int(s)     
         
